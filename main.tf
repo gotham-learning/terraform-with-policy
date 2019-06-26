@@ -38,3 +38,15 @@ data "aws_iam_policy_document" "self-service-doc" {
     ]
   }
 }
+
+// Deploy EC2 instance
+resource "aws_iam_user_policy_attachment" "ec2-full-access" {
+  user = aws_iam_user.nopporn.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+}
+
+// Deploy S3 instance
+resource "aws_iam_user_policy_attachment" "s3-full-access" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+  user = aws_iam_user.nopporn.name
+}
